@@ -272,7 +272,8 @@ This also applies to [RDMA](https://en.wikipedia.org/wiki/Remote_direct_memory_a
 
 ## Appendix 1: Suggested build options
 
-Linux ELF binaries  
+### Linux ELF binaries  
+
 GNU Compiler Collection (GCC)
 
 * Stack Protection (-fstack-protector-strong)  
@@ -295,7 +296,7 @@ LLVM / Clang
 * Format String Warnings (-Wformat \-Wformat-security \-Werror=format-security)  
 * Speculative Load Hardening (-mspeculative-load-hardening)
 
-Windows PE binaries
+### Windows PE binaries
 
 * Buffer Security Check (/GS) \- Also known as "stack cookies".  
 * Control Stack Checking Calls (/Gs)  
