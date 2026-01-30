@@ -246,7 +246,7 @@ These requirements apply to entire platforms as a whole, rather than specific co
 
 Platforms must have dedicated [RoTs](https://trustedcomputinggroup.org/about/what-is-a-root-of-trust-rot/) acting as ultimate trust anchor for secure boot, measured boot and firmware updates. RoTs are especially hardened for security, so using such a device as ultimate trust anchor is more secure than adding this functionality to a more complex component, such a BMC.
 
-It is preferable for this RoT to be [Caliptra](https://github.com/chipsalliance/Caliptra) or [OpenTitan](https://github.com/lowRISC/opentitan).
+It is preferable for this RoT to be [Caliptra](https://github.com/chipsalliance/Caliptra).
 
 ### PLAT002: Physical access
 
