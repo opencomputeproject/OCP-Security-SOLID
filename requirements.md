@@ -4,9 +4,9 @@
 | :---- | :---- | :---- | :---- |
 | 1.0 | 2026-01-27 | Nick Hummel | Eric Eilertson, B Keen |
 
-These requirements are written to be practical and understandable, rather than to be definite specifications. Our expectation is that engineers work with these during the design of the product and do their best to comply with their spirit, as opposed to merely treating this as a checkbox exercise after the fact. These security requirements are to be regarded as inherent to the product and vendor processes, and compliance to them is not an add-on feature.
+These requirements are written to be practical and understandable, rather than to be definite specifications. The expectation is that the DV work with these during the design of the product and do their best to comply with their spirit, as opposed to merely treating this as a checkbox exercise after the fact. These security requirements are to be regarded as inherent to the product and vendor processes, and compliance to them is not an add-on feature.
 
-Not all requirements apply to all products. Check the [product types page](./producttypes.md) to see which requirements apply in your case.
+Not all requirements apply to all products. Check the [product types page](./producttypes.md) to see which requirements apply in any specific case.
 
 ## General
 
@@ -14,9 +14,10 @@ Not all requirements apply to all products. Check the [product types page](./pro
 
 Debug features must fulfill the following:
 
-* Offer no way to extract or leverage cryptographic or otherwise security-sensitive assets, like [UDSs](https://www.microsoft.com/en-us/research/project/dice-device-identifier-composition-engine/) or confidential [OTP](https://en.wikipedia.org/wiki/Programmable_ROM#One_time_programmable_memory) bits, which persist over resets.  
-* Be disabled by default and only possible to enable on reset.  
+* Offer no way to extract or leverage cryptographic or otherwise security-sensitive assets, like [UDSs](https://www.microsoft.com/en-us/research/project/dice-device-identifier-composition-engine/) or confidential [OTP](https://en.wikipedia.org/wiki/Programmable_ROM#One_time_programmable_memory) bits, which persist over resets.
+* Be disabled by default and only possible to enable on reset.
 * Have their enablement measured as part of firmware measurement.
+* Be protected by device-unique authentication without unsafe defaults (i.e. no unauthenticated debug, and no class-wide backdoors (see [OS002](#os002-factory-default-passwords))).
 
 This only applies to debug interfaces that can potentially be used to access confidential data or perform privileged actions. For example, [JTAG](https://en.wikipedia.org/wiki/JTAG) has to fulfill these points, whereas a pure logging facility specifically made to not show any data of the workloads running on the device or other confidential data would not have to fulfill these points.
 
@@ -24,34 +25,34 @@ This only applies to debug interfaces that can potentially be used to access con
 
 Functionality must be implemented to allow isolating workloads/tenants from each other during the normal production use of the platform, more specifically:
 
-* Shared resources, such as [NICs](https://en.wikipedia.org/wiki/Network_interface_controller), [GPUs](https://en.wikipedia.org/wiki/Graphics_processing_unit) and memory, must be configurable to not leak data between concurrent but distinct users.  
-* Shared resources must also be configurable to avoid giving one user the power to make them unusable by the other users, e.g. by taking up all CPU time or simply switching them off.
+* Shared resources, such as [NICs](https://en.wikipedia.org/wiki/Network_interface_controller), [GPUs](https://en.wikipedia.org/wiki/Graphics_processing_unit), DMA, accelerators, performance monitors, and memory, must be configurable to not leak data between concurrent but distinct users.
+* Shared resources must also be configurable to avoid giving one user the power to make them unusable by the other users, e.g. by taking up all CPU time, reconfiguring them, or simply switching them off.
 
 ### GEN003: Sanitization
 
-The product must offer a way to easily and completely erase all user data between uses. This is to ensure no data leaks between workloads/tenants and attackers cannot store malicious data persistently.
+The product must offer a way to easily and completely erase all user data between uses. This is to ensure no data leaks between workloads/tenants and attackers cannot store malicious data persistently. Sanitization must respect [GEN002 isolation requirements](#gen002-isolation).
 
 ### GEN004: Deprovisioning
 
-The product must offer a way to easily (i.e. not having to physically grind it into dust) securely decommission the device. This must include erasing all user data and all other confidential data, such as [OTP](https://en.wikipedia.org/wiki/Programmable_ROM#One_time_programmable_memory) secrets, [private keys](https://en.wikipedia.org/wiki/Public-key_cryptography) and [UDSs](https://www.microsoft.com/en-us/research/project/dice-device-identifier-composition-engine/). Sanitization must adhere to [NIST SP 800-88](https://csrc.nist.gov/pubs/sp/800/88/r2/final).
+The product must offer a way to easily (i.e. not having to physically grind it into dust) securely decommission the device. This must include erasing all user data and all other confidential data, such as [OTP](https://en.wikipedia.org/wiki/Programmable_ROM#One_time_programmable_memory) secrets, [private keys](https://en.wikipedia.org/wiki/Public-key_cryptography), [UDSs](https://www.microsoft.com/en-us/research/project/dice-device-identifier-composition-engine/) and customer configuration data. Sanitization must adhere to [NIST SP 800-88](https://csrc.nist.gov/pubs/sp/800/88/r2/final).
 
 ## Business Processes
 
 ### BP001: Design and source code review
 
-The design and source code of the product must be reviewed by an [approved third party lab](https://github.com/opencomputeproject/OCP-Security-SAFE/blob/main/Documentation/security_review_providers.md) under [OCP S.A.F.E.](https://github.com/opencomputeproject/OCP-Security-SAFE) The short-form report must be published and the long-form report must be provided to customers on request. Products do not have to be vulnerability-free for us to use them. We review vulnerabilities and decide case by case based on what impact a vulnerability has with our use-case and how we can mitigate it in the wider infrastructure. However, we strongly recommend getting reviewers involved as early as possible, as this will make mitigating issues much easier.
+The design and source code of the product must be reviewed by an [approved third party lab](https://github.com/opencomputeproject/OCP-Security-SAFE/blob/main/Documentation/security_review_providers.md) under [OCP S.A.F.E.](https://github.com/opencomputeproject/OCP-Security-SAFE). The short-form report must be published and the long-form report must be provided to customers on request. Products do not have to be vulnerability-free for us to use them. The CSP will review vulnerabilities and decide case by case based on what impact a vulnerability has with CSP use-cases and how each issue can be mitigated in the wider CSP infrastructure. Getting reviewers involved as early as possible is strongly recommended, as this will make mitigating issues much easier.
 
 ### BP002: Security vulnerabilities and incidents
 
-You must implement documented business processes to cover the following:
+The DV must implement documented business processes to cover the following:
 
-* Finding out about public vulnerabilities and vendor-known vulnerabilities of third-party components included in your product.  
-* Communicating all vulnerabilities and security incidents affecting the product that you know about to the customer according to a preagreed timeline.  
+* Finding out about public vulnerabilities and vendor-known vulnerabilities of third-party components included in the product.
+* Communicating all vulnerabilities and security incidents known to affect the product to the customer according to a pre-agreed timeline.
 * Remediating vulnerabilities and security incidents.
 
 ### BP003: Secure transmission
 
-Files that are confidential or need integrity protection must be transmitted in a suitably encrypted way, rather than, for example, by plaintext email. A simple way to accomplish this is usually to upload to the cloud drive of the respective customer. This applies to communication between you and the customer, as well as your suppliers.
+Files that are confidential or need integrity protection must be transmitted in a suitably encrypted way, rather than, for example, by plaintext email or unprotected FTP. A simple way to accomplish this is usually to upload to a secure cloud drive of the respective customer. This applies to communication between the DV and CSP, as well as between the DV and their suppliers.
 
 ## Hardware
 
@@ -65,14 +66,14 @@ Physical interfaces that are not necessary for the production operation of the p
 
 ## Software
 
-These requirements apply to all software, including firmware.
+These requirements apply to all software, including ROM and firmware.
 
 ### SW001: Testing
 
 All software must have the following automated release blocking tests:
 
 * A thorough set of unit and integration tests  
-* Real hand-on test of a normal use-case on real hardware without simulation, emulation or virtualization
+* Real hands-on test of a normal use-case on real hardware without simulation, emulation or virtualization
 
 ### SW002: SBOM
 
@@ -108,13 +109,13 @@ These requirements apply to firmware in addition to the software requirements. F
 
 ### FW001: Firmware signature verification
 
-You must cryptographically sign all production firmware releases with a [PQC](https://en.wikipedia.org/wiki/Post-quantum_cryptography) signature scheme. The first, immutable stage need not be signed. The signatures must be verified before the firmware is loaded (on boot or later) and before a firmware update is applied.
+The DV must cryptographically sign all production firmware releases with a [PQC](https://en.wikipedia.org/wiki/Post-quantum_cryptography) signature scheme. The first, immutable stage need not be signed. The signatures must be verified at *boot-time* after loading, but before the firmware is executed (on boot or later) as well as at *install-time* before a firmware update is applied.
 
 The [OCP Hardware Secure Boot document](https://www.opencompute.org/documents/secure-boot-2-pdf) provides further details on how firmware signature verification on boot should work. ROM patching and other secure boot bypass mechanisms must be permanently disabled for production systems.
 
-It is preferable if dual signing is supported, so that you and the customer can sign the firmware and load/update verify both of them.
+It is preferable that dual signing is supported, so that both the DV and the CSP can sign the firmware and load/update verify both of them.
 
-It would also be preferable if you provide a signing transparency log.
+It would also be preferable if the DV provides a signing transparency log.
 
 ### FW002: Measurement
 
@@ -144,9 +145,9 @@ All firmware must only be updatable prior to the completion of the boot process,
 
 ### FW005: Firmware online recovery
 
-For each piece of firmware there must be a method of how it can be recovered online (= without physical access) when it is corrupted. Firmware that cannot be recovered or can only be recovered offline opens up the risk of attackers bricking entire fleets at scale, with no fast way to recover.
+For each piece of firmware there must be a method for it to be recovered online (i.e. without physical access) when it is corrupted. Firmware that cannot be recovered or can only be recovered offline opens up the risk of attackers bricking entire fleets at scale, with no fast way to recover.
 
-Since flash degrades over time, devices should provide a recovery path if the mutable storage is completely corrupted.If that is not feasible it is acceptable to instead have a guarantee that the flash chip stays legible for at least 6 months without power.
+Since flash memory degrades over time, devices should provide a recovery path if the mutable storage is completely corrupted. If that is not feasible it is acceptable to instead guarantee that the flash chip data retention is at least 6 months without power.
 
 ### FW006: Intel ME
 
@@ -168,17 +169,17 @@ There may not be any factory default passwords that are the same across multiple
 
 ### OS003: Configuration menus
 
-It must be possible to disable all configuration menus, like boot and recovery menus, for the production use of the platform. This is to prevent attackers with physical access from making changes.
+It must be possible to disable all local configuration menus, like boot and recovery menus, for the production use of the platform. This is to prevent attackers with physical access from making changes.
 
 ## Cryptography
 
 ### CRY001: No proprietary algorithms or unvalidated implementations
 
-Proprietary cryptographic algorithms, or algorithms that have not been approved by a national or international standards body, are not considered to provide any security or confidentiality protections to the devices’s owner or user. Furthermore, any proprietary implementation of a cryptographic algorithm must be validated by an [OCP S.A.F.E.](https://github.com/opencomputeproject/OCP-Security-SAFE) review provider. The provenance (whether third party IP, open source, or in-house development) of any cryptographic software, firmware, or hardware in the product must be transparent.
+Proprietary cryptographic algorithms, or algorithms that have not been approved by a national or international standards body, are not considered to provide any security or confidentiality protections to the devices' owner or user. Furthermore, any proprietary implementation of a cryptographic algorithm must be validated by an [OCP S.A.F.E.](https://github.com/opencomputeproject/OCP-Security-SAFE) review provider. The provenance (whether third party IP, open source, or in-house development) of any cryptographic software, firmware, or hardware in the product must be transparent.
 
 ### CRY002: FIPS 140-3 validation
 
-[FIPS 140-3](https://en.wikipedia.org/wiki/FIPS_140-3) validation is a complex topic, we cannot provide a simple answer here on whether it will be required for a particular product. An expert needs to assess this case by case.
+[FIPS 140-3](https://en.wikipedia.org/wiki/FIPS_140-3) validation is a complex topic, and it is beyond the scope of these requirements to provide a simple answer on whether it will be required for a particular product. An expert needs to assess this case by case.
 
 ### CRY003: Entropy
 
@@ -220,9 +221,11 @@ System memory must be encrypted to protect data from being exfiltrated by a phys
 
 ## PCIe
 
+These requirements apply to any system that includes a PCIe bus, or a device that connects to one.
+
 ### PCIE001: IOMMU
 
-PCIe devices can directly access the system memory of a platform. If a device is compromised this could lead to a compromise of the entire platform. To prevent that all devices must be connected via an [IOMMU](https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit) and be set to enabled mode (as opposed to passthrough mode). This accomplishes that devices can only access the memory that they should be able to access.
+PCIe devices can directly access the system memory of a platform. If a device is compromised this could lead to a compromise of the entire platform. To prevent this, all devices must be connected via an [IOMMU](https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit) and be set to enabled mode (as opposed to passthrough mode). This accomplishes that devices can only access the system resources that they should be able to access.
 
 ### PCIE002: Encryption and integrity protection
 
@@ -230,7 +233,7 @@ PCIe links must be encrypted and integrity protected, if the platform is deploye
 
 ### PCIE003: Sanitization on FLR
 
-PCIe devices must sanitize themselves on FLRs (Function Level Resets). Sanitization means all data, apart from persistent configuration, must be erased. This ensures that we can sanitize platforms between workloads.
+PCIe devices must sanitize themselves on FLRs (Function Level Resets). Sanitization means all data, apart from persistent configuration, must be erased. This ensures that the CSP can sanitize platforms between workloads.
 
 ## RoT
 
@@ -266,7 +269,7 @@ Storage drives must sanitize in accordance with [NIST SP 800-88](https://csrc.ni
 
 ### NET001: Confidentiality and integrity protection
 
-Networking devices, such as [NICs](https://en.wikipedia.org/wiki/Network_interface_controller), switches and routers need to provide functionality to enable networks to protect the confidentiality and integrity of network traffic. This is usually [IPsec](https://en.wikipedia.org/wiki/IPsec) or [PSP](https://github.com/google/psp).
+Networking devices, such as [NICs](https://en.wikipedia.org/wiki/Network_interface_controller), switches and routers need to provide functionality to enable networks to protect the confidentiality and integrity of network traffic. This is usually [IPsec](https://en.wikipedia.org/wiki/IPsec), [PSP](https://github.com/google/psp), or [Wireguard](https://www.wireguard.com/).
 
 This also applies to [RDMA](https://en.wikipedia.org/wiki/Remote_direct_memory_access) (Nvidia: [GPUDirect](https://developer.nvidia.com/gpudirect)) traffic, especially [RoCE](https://en.wikipedia.org/wiki/RDMA_over_Converged_Ethernet) (RDMA over Converged Ethernet).
 
@@ -281,7 +284,7 @@ GNU Compiler Collection (GCC)
 * Fortify Source (-D\_FORTIFY\_SOURCE=2) \- requires \-O2 or higher  
 * Non-Executable Stack (-z noexecstack)  
 * Address Space Layout Randomization (-fpie \-Wl,-pie for executables, \-fpic \-shared for shared libraries)  
-* GOT Protection \- BIND\_NOW (-Wl,-z,relro \-Wl,-z,now) for most distributions. For RHEL 6, also use \-Wl,-z,defs to catch underlinking.  
+* GOT Protection \- BIND\_NOW (-Wl,-z,relro \-Wl,-z,now) for most distributions. For RHEL 6, also use \-Wl,-z,defs to catch underlinking.
 * Format String Warnings (-Wformat \-Wformat-security \-Werror=format-security)  
 * GCC 8 or later: Stack Clash Protection (-fstack-clash-protection)
 
@@ -298,7 +301,7 @@ LLVM / Clang
 
 ### Windows PE binaries
 
-* Buffer Security Check (/GS) \- Also known as "stack cookies".  
+* Buffer Security Check (/GS) \- Also known as "stack cookies".
 * Control Stack Checking Calls (/Gs)  
 * Control Flow Guard (/guard:cf)  
 * CET Shadow Stack Compatible (/CETCOMPAT)  
@@ -307,15 +310,11 @@ LLVM / Clang
 * Handle Large Addresses (/LARGEADDRESSAWARE) (64-bit only)  
 * Additional Security Checks (/sdl)  
 * Spectre Mitigations using the /Qspectre compiler flag  
-* All RPC and DCOM code must be compiled using the /ROBUST option when using the MIDL compiler. The minimum target level is NT61 (/TARGET NT61).  
-* Avoid suppressing specific warnings with /wdnnnn or using pragmas in code.  
+* All RPC and DCOM code must be compiled using the /ROBUST option when using the MIDL compiler. The minimum target level is NT61 (/TARGET NT61).
+* Avoid suppressing specific warnings with /wdnnnn or using pragmas in code.
 * Enable all warnings using the /Wall flag, and treat warnings as errors with /WX
-
-In addition for 32-bit Windows binaries:
-
-* Data Execution Prevention (DEP) (NXCOMPAT)  
-* Safe Exception Handlers (/SAFESEH)
-
-In addition, for Windows kernel-mode driver components:
-
-* Enforce deprecation of insecure CRT functions for drivers (/D\_CRT\_SECURE\_FORCE\_DEPRECATE)
+* For 32-bit Windows binaries:
+  * Data Execution Prevention (DEP) (NXCOMPAT)  
+  * Safe Exception Handlers (/SAFESEH)
+* For Windows kernel-mode driver components:
+  * Enforce deprecation of insecure CRT functions for drivers (/D\_CRT\_SECURE\_FORCE\_DEPRECATE)
