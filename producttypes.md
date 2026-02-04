@@ -8,7 +8,7 @@ Not all requirements are applicable to all types of products. This page shows wh
 
 ## All products
 
-This list applies to all products regardless of type. To, for example, get a full list of requirements for a server, you need this list plus the server-specific list.
+This list applies to all products regardless of type. To, for example, get a full list of requirements for a server, use this list plus the server-specific list.
 
 * All [general requirements](./requirements.md#general)  
 * All [business process requirements](./requirements.md#business-processes)  
