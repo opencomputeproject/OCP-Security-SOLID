@@ -268,7 +268,7 @@ Storage drives must sanitize in accordance with [NIST SP 800-88](https://csrc.ni
 
 Networking devices, such as [NICs](https://en.wikipedia.org/wiki/Network_interface_controller), switches and routers need to provide functionality to enable networks to protect the confidentiality and integrity of network traffic. This is usually [IPsec](https://en.wikipedia.org/wiki/IPsec) or [PSP](https://github.com/google/psp).
 
-This also applies to [RDMA](https://en.wikipedia.org/wiki/Remote_direct_memory_access) (Nvidia: [GPUDirect](https://developer.nvidia.com/gpudirect)) traffic, especially [RoCE](https://en.wikipedia.org/wiki/RDMA_over_Converged_Ethernet) (RDMA over Converged Ethernet).
+This also applies to [RDMA](https://en.wikipedia.org/wiki/Remote_direct_memory_access) (Nvidia: [GPUDirect](https://developer.nvidia.com/gpudirect)) traffic, especially [RoCE](https://en.wikipedia.org/wiki/RDMA_over_Converged_Ethernet) (RDMA over Converged Ethernet).  Newer standards for RDMA protection include [Ultra Ethernet](https://ultraethernet.org/) for scale out networking and [Ultra Accelerator Link](https://ualinkconsortium.org/) for scale up networking.
 
 ## Appendix 1: Suggested build options
 
