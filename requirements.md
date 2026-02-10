@@ -24,7 +24,7 @@ This only applies to debug interfaces that can potentially be used to access con
 
 Functionality must be implemented to allow isolating workloads/tenants from each other during the normal production use of the platform, more specifically:
 
-* Shared resources, such as [NICs](https://en.wikipedia.org/wiki/Network_interface_controller), [GPUs](https://en.wikipedia.org/wiki/Graphics_processing_unit) and memory, must be configurable to not leak data between concurrent but distinct users.
+* Shared resources, such as [NICs](https://en.wikipedia.org/wiki/Network_interface_controller), [GPUs](https://en.wikipedia.org/wiki/Graphics_processing_unit) and other accelerators, [hardware performance counters](https://en.wikipedia.org/wiki/Hardware_performance_counter) and memory, must be configurable to not leak data between concurrent but distinct users.
 * Shared resources must also be configurable to avoid giving one user the power to make them unusable by the other users, e.g. by taking up all CPU time or simply switching them off.
 
 ### GEN003: Sanitization
@@ -148,10 +148,6 @@ For each piece of firmware there must be a method for it to be recovered online 
 
 Since flash memory degrades over time, devices should provide a recovery path if the mutable storage is completely corrupted. If that is not feasible it is acceptable to instead guarantee that the flash memory data retention is at least 6 months without power.
 
-### FW006: Intel ME
-
-[Intel ME (Management Engine)](https://en.wikipedia.org/wiki/Intel_Management_Engine) is a system integrated into modern Intel systems, which has far-reaching privileges. It is usually not possible to completely disable it, as it is involved in the boot process. But it must be restricted as much as possible to reduce its attack surface, specifically it must run in recovery mode or somehow be restricted even further.
-
 ## OS/Firmware
 
 These requirements apply to Operating Systems, as well as firmware.
@@ -251,6 +247,10 @@ It is preferable for this RoT to be [Caliptra](https://github.com/chipsalliance/
 ### PLAT002: Physical access
 
 It must be reasonably difficult (require special equipment and a considerable amount of time) to exploit the platform (exfiltrate confidential data, compel the platform to perform privileged actions or execute arbitrary code) from the parts of the platform that are physically accessible during its normal operation. For rack servers that is the front panel. Otherwise it would be too simple for an attacker inside the datacenter to cause considerable damage.
+
+### PLAT003: Out-of-band management controllers
+
+Out-of-band management controllers must be configured to have the least amount of privileges possible, while still enabling the normal operation of the platform in a datacenter setting. This reduces the potential damage on compromise. One example is the [Intel ME (Management Engine)](https://en.wikipedia.org/wiki/Intel_Management_Engine), which must be configured to run in recovery mode or an even less privileged mode.
 
 ## Storage drive
 
