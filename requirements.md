@@ -35,6 +35,12 @@ The product must offer a way to easily and completely erase all user data betwee
 
 The product must offer a way to easily (i.e. not having to physically grind it into dust) securely decommission the device. This must include erasing all user data and all other confidential data, such as [OTP](https://en.wikipedia.org/wiki/Programmable_ROM#One_time_programmable_memory) secrets, [private keys](https://en.wikipedia.org/wiki/Public-key_cryptography) and [UDSs](https://www.microsoft.com/en-us/research/project/dice-device-identifier-composition-engine/). Sanitization must adhere to [NIST SP 800-88](https://csrc.nist.gov/pubs/sp/800/88/r2/final).
 
+### GEN005: Dedicated RoT
+
+The product must have a dedicated [RoT](https://trustedcomputinggroup.org/about/what-is-a-root-of-trust-rot/) acting as ultimate trust anchor for secure boot, measured boot and firmware updates. RoTs are especially hardened for security, so using such a device as ultimate trust anchor is more secure than adding this functionality to a more complex component.
+
+It is preferable for this RoT to be [Caliptra](https://github.com/chipsalliance/Caliptra).
+
 ## Business Processes
 
 ### BP001: Design and source code review
@@ -238,13 +244,7 @@ RoTs must implement protections against [side channel analysis](https://en.wikip
 
 These requirements apply to entire platforms as a whole, rather than specific components. A whole server or network switch are examples of platforms.
 
-### PLAT001: Dedicated RoT
-
-Platforms must have dedicated [RoTs](https://trustedcomputinggroup.org/about/what-is-a-root-of-trust-rot/) acting as ultimate trust anchor for secure boot, measured boot and firmware updates. RoTs are especially hardened for security, so using such a device as ultimate trust anchor is more secure than adding this functionality to a more complex component, such a BMC.
-
-It is preferable for this RoT to be [Caliptra](https://github.com/chipsalliance/Caliptra).
-
-### PLAT002: Physical access
+### PLAT001: Physical access
 
 It must be reasonably difficult (require special equipment and a considerable amount of time) to exploit the platform (exfiltrate confidential data, compel the platform to perform privileged actions or execute arbitrary code) from the parts of the platform that are physically accessible during its normal operation. For rack servers that is the front panel. Otherwise it would be too simple for an attacker inside the datacenter to cause considerable damage.
 
