@@ -11,4 +11,6 @@ Requirements intended to be added in the future are shown here. The purpose of t
 
 ## New requirements
 
+### SW007 Reproducible builds
+
 ### STRG003 OCP L.O.C.K.
