@@ -8,6 +8,7 @@ Requirements intended to be added in the future are shown here. The purpose of t
 
 * Static analysis for security
 * Fuzzing of external interfaces, as well as internal interfaces between trust boundaries
+* Automated LLM reviews
 
 ## New requirements
 
