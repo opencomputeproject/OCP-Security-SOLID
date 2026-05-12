@@ -11,6 +11,8 @@ Requirements intended to be added in the future are shown here. The purpose of t
 
 ## New requirements
 
-### SW007 Reproducible builds
+### SW007 [SLSA L2](https://slsa.dev/spec/v1.1/levels)
+
+### SW008 Reproducible builds
 
 ### STRG003 OCP L.O.C.K.
