@@ -232,7 +232,12 @@ PCIe links must be encrypted and integrity protected, if the platform is deploye
 
 ### PCIE003: Sanitization on FLR
 
-PCIe devices must sanitize themselves on FLRs (Function Level Resets). Sanitization means all data, apart from persistent configuration, must be erased. This ensures that the platform can be sanitized between workloads.
+PCIe devices must sanitize themselves on FLRs (Function Level Resets). Sanitization means all data must be erased, except the following:
+
+* Persistent configuration meant to remain on reboot
+* For storage drives, data they are meant to store persisently
+
+This ensures that the platform can be sanitized between workloads.
 
 ## RoT
 
