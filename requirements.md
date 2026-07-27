@@ -257,7 +257,7 @@ It must be reasonably difficult (require special equipment and a considerable am
 
 ### STRG001: TCG Opal
 
-Storage drives must be [TCG Opal](https://en.wikipedia.org/wiki/Opal_Storage_Specification) compliant in order to provide standardized encryption-at-rest and sanitization functionality.
+SEDs (Self-encrypting drives) must be [TCG Opal](https://en.wikipedia.org/wiki/Opal_Storage_Specification) or [TCG Enterprise](https://trustedcomputinggroup.org/resource/storage-work-group-storage-security-subsystem-class-enterprise-specification/) compliant in order to provide standardized encryption-at-rest and sanitization functionality.
 
 ### STRG002: Sanitization
 

@@ -38,7 +38,7 @@ A separate PCIe card, or alternately a relatively fixed-function assembly of har
 
 ## Network appliance
 
-Routers, switches, etc., but not NICs.
+Routers, switches, etc., but not NICs
 
 * All [system memory requirements](./requirements.md#system-memory)  
 * All [RoT requirements](./requirements.md#rot)  
@@ -49,7 +49,8 @@ Routers, switches, etc., but not NICs.
 
 Persistent storage drives like SSDs or magnetic drives
 
-* All [storage drive requirements](./requirements.md#storage-drive)
+* SEDs (Self-encrypting drives) only: [STRG001](./requirements.md#strg001-tcg-opal)
+* [STRG002](./requirements.md#strg002-sanitization)
 
 ## NIC
 
