@@ -154,6 +154,8 @@ For each piece of firmware there must be a method for it to be recovered online 
 
 Since flash memory degrades over time, devices should provide a recovery path if the mutable storage is completely corrupted. If that is not feasible it is acceptable to instead guarantee that the flash memory data retention is at least 6 months without power.
 
+This requirement excludes any piece of firmware that preceds the establishement of the Internet connection (e.g. boot ROM).
+
 ## OS/Firmware
 
 These requirements apply to Operating Systems, as well as firmware.
