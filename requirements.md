@@ -148,9 +148,9 @@ A mechanism must be implemented that ensures that an older version of a firmware
 
 All firmware must only be updatable prior to the completion of the boot process, but must not be writable afterwards. This ensures that an attacker cannot establish a permanent foothold by embedding malicious code in firmware.
 
-### FW005: Firmware online recovery
+### FW005: Firmware recovery
 
-For each piece of firmware there must be a method for it to be recovered online (i.e. without physical access) when it is corrupted. Firmware that cannot be recovered or can only be recovered offline opens up the risk of attackers bricking entire fleets at scale, with no fast way to recover.
+For each piece of firmware (except ROM), there must be a method for it to be recovered at scale without physical access, when it is corrupted. Firmware that cannot be recovered or can only be recovered with physical access opens up the risk of attackers bricking entire fleets at scale, with no fast way to recover.
 
 Since flash memory degrades over time, devices should provide a recovery path if the mutable storage is completely corrupted. If that is not feasible it is acceptable to instead guarantee that the flash memory data retention is at least 6 months without power.
 
