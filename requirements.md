@@ -45,7 +45,7 @@ It is preferable for this RoT to be [Caliptra](https://github.com/chipsalliance/
 
 ### BP001: Design and source code review
 
-The design and source code of the product must be reviewed by an [approved third party lab](https://github.com/opencomputeproject/OCP-Security-SAFE/blob/main/Documentation/security_review_providers.md) under [OCP S.A.F.E.](https://github.com/opencomputeproject/OCP-Security-SAFE) The short-form report must be published. Products do not have to be vulnerability-free to use them. Vulnerabilities are reviewed and it is decided case by case, based on what impact a vulnerability has with a given use-case and how it can be mitigated in the wider infrastructure, whether it is acceptable to use the product. However, it is strongly recommended getting reviewers involved as early as possible, as this will make mitigating issues much easier.
+The design and source code of the product must be reviewed by an [approved third party lab](https://github.com/opencomputeproject/OCP-Security-SAFE/blob/main/Documentation/security_review_providers.md) under [OCP S.A.F.E.](https://github.com/opencomputeproject/OCP-Security-SAFE) The short-form report must be signed by an SRP and ready to be published if the Vendor chooses. Products do not have to be vulnerability-free to use them. Vulnerabilities are reviewed and it is decided case by case, based on what impact a vulnerability has with a given use-case and how it can be mitigated in the wider infrastructure, whether it is acceptable to use the product. However, it is strongly recommended getting reviewers involved as early as possible, as this will make mitigating issues much easier.
 
 ### BP002: Security vulnerabilities and incidents
 
