@@ -12,13 +12,13 @@ This list applies to all products regardless of type. To, for example, get a ful
 
 * All [general requirements](./requirements.md#general)  
 * All [business process requirements](./requirements.md#business-processes)  
-* All [hardware requirements](./requirements.md#hardware)  
+* If it is a physical product: All [hardware requirements](./requirements.md#hardware)  
 * All [software requirements](./requirements.md#software)  
 * All [firmware requirements](./requirements.md#firmware)  
 * All [OS/firmware requirements](./requirements.md#osfirmware)  
 * All [cryptography requirements](./requirements.md#cryptography)  
-* All [CPU requirements](./requirements.md#cpu)  
-* All [PCIe requirements](./requirements.md#pcie)
+* If the product has a CPU: All [CPU requirements](./requirements.md#cpu)  
+* If the product uses PCIe (host complex or endpoint): All [PCIe requirements](./requirements.md#pcie)
 
 ## Server
 
