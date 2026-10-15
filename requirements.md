@@ -22,7 +22,7 @@ This only applies to debug interfaces that can potentially be used to access con
 
 ### GEN002: Isolation
 
-Functionality must be implemented to allow isolating workloads/tenants from each other during the normal production use of the platform, more specifically:
+If the product claims to support multi-user use-cases, functionality must be implemented to allow isolating workloads/tenants from each other during the normal production use of the platform, more specifically:
 
 * Shared resources, such as [NICs](https://en.wikipedia.org/wiki/Network_interface_controller), [GPUs](https://en.wikipedia.org/wiki/Graphics_processing_unit) and other accelerators, [hardware performance counters](https://en.wikipedia.org/wiki/Hardware_performance_counter) and memory, must be configurable to not leak data between concurrent but distinct users.
 * Shared resources must also be configurable to avoid giving one user the power to make them unusable by the other users, e.g. by taking up all CPU time or simply switching them off.
