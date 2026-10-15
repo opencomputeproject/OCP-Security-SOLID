@@ -57,3 +57,26 @@ Persistent storage drives like SSDs or magnetic drives
 Network cards
 
 * All [networking requirements](./requirements.md#networking)
+
+## Bootloader
+
+* All [business process requirements](./requirements.md#business-processes)
+* [SW001](./requirements.md#sw001-testing)
+* [SW002](./requirements.md#sw002-sbom)
+* [SW003](./requirements.md#sw003-exploit-protections)
+* [SW004](./requirements.md#sw004-updatability)
+* [SW005](./requirements.md#sw005-dependency-updates)
+* All [firmware requirements](./requirements.md#firmware)
+* All [OS/firmware requirements](./requirements.md#osfirmware)
+
+Optional depending on implemented functionality:
+
+* One or more of [general requirements](./requirements.md#general)
+* One or more of [cryptography requirements](./requirements.md#cryptography)
+* [SW006](./requirements.md#sw006-privileged-access)
+* One or more of [system memory requirements](./requirements.md#system-memory)
+* [HW002](./requirements.md#hw002-physical-interfaces)
+* One or more of  [CPU requirements](./requirements.md#cpu)
+* [PCIE001](./requirements.md#pcie001-iommu)
+* [PCIE002](./requirements.md#pcie002-encryption-and-integrity-protection)
+* [PLAT001](./requirements.md#plat001-physical-access)
