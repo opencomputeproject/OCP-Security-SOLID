@@ -1,6 +1,6 @@
-# Future requirements
+# Discussion points
 
-Requirements intended to be added in the future are shown here. The purpose of this is to enable discussions and early planning.
+This is a list of ideas that we want to explore further to maybe add them as requirements at some point.
 
 ## Additions to existing requirements
 

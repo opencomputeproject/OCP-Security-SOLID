@@ -14,4 +14,4 @@ The [product types page](./producttypes.md) shows which requirements apply to a 
 
 The [requirements page](./requirements.md) shows all requirements.
 
-The [future requirements page](futurerequirements.md) shows requirements that are being considered for the future.
+The [discussion points page](discussionpoints.md) shows ideas for future additions.
