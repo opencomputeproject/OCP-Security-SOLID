@@ -6,6 +6,8 @@
 
 These requirements are written to be practical and understandable, rather than to be definite specifications. The expectation is that the vendor works with these during the design of the product and does their best to comply with their spirit, as opposed to merely treating this as a checkbox exercise after the fact. These security requirements are to be regarded as inherent to the product and vendor processes, and compliance to them is not an add-on feature.
 
+The version of this page is only incremented when what is required actually changes, but not if only further clarification is added or a small error is corrected. If you want to reference a specific phrasing simply use the commit ID.
+
 Not all requirements apply to all products. Check the [product types page](./producttypes.md) to see which requirements apply in a specific case.
 
 ## General
